@@ -1,0 +1,26 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`Braille line drawing render output should match snapshot for various y positions 1`] = `
+"y=1:
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m⠀\x1B[38;2;0;255;100m⠛⠛⠛⠃\x1B[0m
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m⠀⠀⠀⠀⠀\x1B[0m
+
+y=2:
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m⠀\x1B[38;2;0;255;100m⠶⠶⠶⠆\x1B[0m
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m⠀⠀⠀⠀⠀\x1B[0m
+
+y=3:
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m⠀\x1B[38;2;0;255;100m⣤⣤⣤⡄\x1B[0m
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m⠀⠀⠀⠀⠀\x1B[0m
+
+y=4:
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m⠀\x1B[38;2;0;255;100m⣀⣀⣀⡀\x1B[0m
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m⠀\x1B[38;2;0;255;100m⠉⠉⠉⠁\x1B[0m"
+`;
+
+exports[`Braille line drawing dashed lines with thickness should maintain gaps 1`] = `"\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m⠀\x1B[38;2;255;255;255m⠛\x1B[38;2;0;0;0m⠀\x1B[38;2;255;255;255m⠛\x1B[38;2;0;0;0m⠀\x1B[38;2;255;255;255m⠛\x1B[38;2;0;0;0m⠀\x1B[38;2;255;255;255m⠛\x1B[38;2;0;0;0m⠀⠀\x1B[0m"`;
+
+exports[`Braille line drawing vertical lines with thickness should work correctly 1`] = `
+"\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m⣶\x1B[38;2;0;0;0m⠀\x1B[0m
+\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m⠿\x1B[38;2;0;0;0m⠀\x1B[0m"
+`;

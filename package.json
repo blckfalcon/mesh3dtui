@@ -1,0 +1,26 @@
+{
+	"name": "mesh3dtui",
+	"module": "src/index.tsx",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"dev": "bun run --watch src/index.tsx",
+		"debug": "bun run --watch src/examples/line-styles.ts",
+		"lint": "bun run biome lint",
+		"format": "bun run biome format",
+		"test": "bun test"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.14",
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"@opentui/core": "^0.1.75",
+		"@opentui/react": "^0.1.75",
+		"ghostty-opentui": "^1.3.13",
+		"react": "^19.2.3"
+	}
+}

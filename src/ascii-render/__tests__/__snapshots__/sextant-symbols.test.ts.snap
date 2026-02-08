@@ -1,0 +1,47 @@
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
+
+exports[`Sextant symbols should render single pixel as top-left sextant 1`] = `"\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m🬀\x1B[0m"`;
+
+exports[`Sextant symbols should render full 2x3 block as full character 1`] = `"\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m█\x1B[0m"`;
+
+exports[`Sextant symbols should render diagonal pattern correctly 1`] = `"\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m🬗\x1B[0m"`;
+
+exports[`Sextant symbols should render vertical line with sextant symbols 1`] = `
+"\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m▌\x1B[0m
+\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m▌\x1B[0m
+\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m▌\x1B[0m"
+`;
+
+exports[`Sextant symbols should render horizontal line with sextant symbols 1`] = `"\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m🬋🬋🬋🬋\x1B[0m"`;
+
+exports[`Sextant symbols should render rectangle with sextant symbols 1`] = `
+"\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m🬦🬋🬋🬓\x1B[0m
+\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m🬉🬋🬋🬄\x1B[0m"
+`;
+
+exports[`Sextant symbols should render filled rectangle with sextant symbols 1`] = `
+"\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m🬦🬹🬹🬓\x1B[0m
+\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m🬉🬎🬎🬄\x1B[0m"
+`;
+
+exports[`Sextant symbols should render circle with sextant symbols 1`] = `
+"\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m  \x1B[38;2;255;255;255m🬞🬢\x1B[38;2;0;0;0m  \x1B[0m
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m \x1B[38;2;255;255;255m🬇🬐\x1B[38;2;0;0;0m \x1B[38;2;255;255;255m🬗\x1B[38;2;0;0;0m \x1B[0m
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m  \x1B[38;2;255;255;255m🬁🬅\x1B[38;2;0;0;0m  \x1B[0m"
+`;
+
+exports[`Sextant symbols should render filled circle with sextant symbols 1`] = `
+"\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m  \x1B[38;2;255;85;85m🬞🬱\x1B[38;2;0;0;0m  \x1B[0m
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m \x1B[38;2;255;85;85m🬇██🬛\x1B[38;2;0;0;0m \x1B[0m
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m  \x1B[38;2;255;85;85m🬁🬆\x1B[38;2;0;0;0m  \x1B[0m"
+`;
+
+exports[`Sextant symbols should render diagonal line with sextant symbols 1`] = `
+"\x1B[38;2;255;255;255m\x1B[48;2;0;0;0m🬈🬢\x1B[38;2;0;0;0m  \x1B[0m
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m  \x1B[38;2;255;255;255m🬈🬢\x1B[0m"
+`;
+
+exports[`Sextant symbols should handle empty buffer 1`] = `
+"\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m  \x1B[0m
+\x1B[38;2;0;0;0m\x1B[48;2;0;0;0m  \x1B[0m"
+`;
