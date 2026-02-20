@@ -1,7 +1,19 @@
-import { createCliRenderer, FrameBufferRenderable } from "@opentui/core";
+import { createCliRenderer } from "@opentui/core";
+import { ThreeRenderable } from "@opentui/core/3d";
 import { createRoot, extend, useKeyboard, useRenderer } from "@opentui/react";
 import { GhosttyTerminalRenderable } from "ghostty-opentui/terminal-buffer";
 import { useCallback, useEffect, useRef, useState } from "react";
+import {
+	AmbientLight,
+	BoxGeometry,
+	Color,
+	DirectionalLight,
+	MeshPhongMaterial,
+	PerspectiveCamera,
+	Mesh as ThreeMesh,
+	Scene as ThreeScene,
+	Vector3,
+} from "three";
 import { AsciiRenderer, ColorMode, hex, SymbolSet } from "./ascii-render/index";
 
 const BUFFER_WIDTH = 80;
@@ -156,16 +168,52 @@ function drawSphere() {
 	}
 }
 
+const sceneRoot = new ThreeScene();
+sceneRoot.background = new Color().setHex(0x5a5a5a);
+const ambientLight = new AmbientLight(new Color(0.3, 0.35, 0.35), 1.0);
+sceneRoot.add(ambientLight);
+
+const keyLight = new DirectionalLight(new Color(1.0, 0.95, 0.9), 1.2);
+keyLight.position.set(2.5, 2.0, 3.0);
+sceneRoot.add(keyLight);
+
+const fillLight = new DirectionalLight(new Color(0.5, 0.7, 1.0), 0.6);
+fillLight.position.set(-2.0, -1.5, 2.5);
+sceneRoot.add(fillLight);
+
+const cubeGeometry = new BoxGeometry(1.0, 1.0, 1.0);
+const cubeMaterial = new MeshPhongMaterial({
+	color: new Color(0.85, 0.85, 0.85),
+	emissive: new Color(0.2, 0.2, 0.6),
+	shininess: 80,
+	wireframe: true,
+});
+
+const cubeMesh = new ThreeMesh(cubeGeometry, cubeMaterial);
+cubeMesh.name = "cube";
+sceneRoot.add(cubeMesh);
+
+const cameraNode = new PerspectiveCamera(45, 1, 0.1, 100);
+cameraNode.position.set(0, 0, 3);
+cameraNode.name = "main_camera";
+
+const rotationSpeed = new Vector3(0.0, 0.0, 0.0);
+
 function App() {
 	const renderer = useRenderer();
 	const [output, setOutput] = useState("");
 	const [meshNav, setMeshNav] = useState(0);
+	const [threeRend, setThreeRend] = useState(false);
 	const lastTimeRef = useRef(0);
 
 	const animate = useCallback(() => {
 		const dt = 1 / FPS;
 		angle += Math.PI * dt;
 		lastTimeRef.current = dt;
+
+		cubeMesh.rotation.x += rotationSpeed.x * dt;
+		cubeMesh.rotation.y += rotationSpeed.y * dt;
+		cubeMesh.rotation.z += rotationSpeed.z * dt;
 
 		rend.clear(buffer, hex("#1a1a1a"));
 
@@ -204,6 +252,26 @@ function App() {
 				setMeshNav((nav) => (nav + 1) % 3);
 				break;
 			}
+			case "w": {
+				rotationSpeed.x -= 0.1;
+				break;
+			}
+			case "a": {
+				rotationSpeed.y -= 0.1;
+				break;
+			}
+			case "s": {
+				rotationSpeed.x += 0.1;
+				break;
+			}
+			case "d": {
+				rotationSpeed.y += 0.1;
+				break;
+			}
+			case "r": {
+				setThreeRend(!threeRend);
+				break;
+			}
 			case "+": {
 				dz -= 0.1;
 				break;
@@ -222,11 +290,16 @@ function App() {
 	return (
 		<box
 			style={{
+				flexDirection: "row",
 				backgroundColor: "#000000",
 				height: "100%",
 			}}
 		>
-			<ghostty-terminal ansi={output} />
+			{threeRend ? (
+				<three style={{}} width={40} height={20} scene={sceneRoot} camera={cameraNode} />
+			) : (
+				<ghostty-terminal ansi={output} />
+			)}
 		</box>
 	);
 }
@@ -234,12 +307,12 @@ function App() {
 declare module "@opentui/react" {
 	interface OpenTUIComponents {
 		"ghostty-terminal": typeof GhosttyTerminalRenderable;
-		framebuffer: typeof FrameBufferRenderable;
+		three: typeof ThreeRenderable;
 	}
 }
 
 extend({ "ghostty-terminal": GhosttyTerminalRenderable });
-extend({ framebuffer: FrameBufferRenderable });
+extend({ three: ThreeRenderable });
 
 const cliRenderer = await createCliRenderer();
 createRoot(cliRenderer).render(<App />);
